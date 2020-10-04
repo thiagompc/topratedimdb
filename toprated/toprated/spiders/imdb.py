@@ -15,10 +15,11 @@ class ImdbSpider(scrapy.Spider):
     def rating_page(self, response):
         films = response.xpath('//tr').getall()
         titles = response.xpath('//tr//td[@class="titleColumn"]/a/text()').getall()
+        rating = response.xpath('//tr//td[@class="ratingColumn imdbRating"]/strong/text()').getall()
         for title in titles:
-            
             yield{
-                'title': title
+                'title': title,
+                'rating': rating
             }
         import pdb; pdb.set_trace()
         pass
