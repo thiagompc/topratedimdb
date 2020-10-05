@@ -18,9 +18,12 @@ class ImdbSpider(scrapy.Spider):
         for film in films:
             title = film.xpath('td[@class="titleColumn"]/a/text()').get()
             rating = film.xpath(
-                'td[@class="ratingColumn imdbRating"]/strong/text()').get()  
+                'td[@class="ratingColumn imdbRating"]/strong/text()').get()
+            year =  film.xpath(
+                'td[@class="titleColumn"]/span[@class="secondaryInfo"]/text()').get() 
             yield{
                 'title': title,
+                'year': year,
                 'rating': rating
-            }
         
+            }
